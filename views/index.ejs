@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ToDo List Application</title>
+        <link rel="stylesheet" href="styles/main.css">
+        <script src="/scripts/index.js"></script>  
+</head>
+<body>
+    <%- include('header') %>
+
+    <div class="popup-container" id="popupContainer">
+        <form action="/" method="post">
+            <input type="text" name="heading" id="task-heading" placeholder="Task Heading">
+            <br>
+            <textarea name="detail" class="custom-sized-textarea" placeholder="Type here..." id="task-detail" rows="7" cols="20"></textarea>
+            <br>
+            <button type="submit">Submit Task</button>
+            <button type="reset" onclick="onClick(this)">Cancel</button>
+        </form>
+    </div>
+
+    <% var editTaskHeading %>
+
+    <div class="task-container" id="task-container">
+        <% for (var element=0; element < locals.tasksArray.length; element++) { %>
+            <div class="task expandable-box" onclick="bigger()" id="expandable-box">
+                <h2 id="heading-content"><%= locals.tasksArray[element].heading %></h2>
+                <p id="task-content"><%= locals.tasksArray[element].task %></p>
+
+                <form action="edit" method="post">
+                    <button type="submit" id="edit" value="<%= locals.tasksArray[element]._id %>" name="edit">Update</button>
+                </form>
+
+                <form action="/delete" method="post" id="checkboxSubmitForm" id="myForm">
+                    <button type="submit" value="<%= locals.tasksArray[element]._id %>" name="delete" id="del" onclick="ask(event)">Delete</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+
+    <% if (locals.toEditTask) { %>
+        <form action="/edit:done" method="post" id="editContent">
+            <input type="text" name="editContentHeading" id="editContentHeading" value="<%= locals.toEditTask.heading %>">
+            <textarea name="editContentDetail" id="editContentDetail" cols="20" rows="7" contenteditable="true" ><%= locals.toEditTask.task %></textarea>
+            
+            <div>
+                <button type="reset" value="" onclick="removeEditForm()" name="cancelEdit" id="cancelEdit">Cancel</button>
+                <button type="submit" value="<%= locals.toEditTask._id %>" onclick="removeEditForm()" name="submitEdit" id="submitEdit">Save Changes</button>
+            </div>
+        </form>
+    <% } %>
+</body>
+</html>
