@@ -3,7 +3,7 @@
 
 A simple yet effective todo list application that supports all the CRUD functionalities.
 
-This project was created to test my fundamental knowledge in Express.js, Mongoose ODM and EJS. So, anybody who has just learned the basics of full stack development and is willing to create a simple project to test his skills can use this project for his reference.
+This project was created to test my fundamental knowledge in Express.js, MongoDB and EJS, so, anybody who has just learned the basics of full stack development and is willing to create a simple project to test his skills can use this project for his reference.
 
 
 ## References to Official Documentation
